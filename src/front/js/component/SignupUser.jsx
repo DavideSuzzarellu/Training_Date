@@ -134,7 +134,7 @@ function SignupUser() {
           <Form.Control
             type="number"
             placeholder="Phone number"
-            value={inputs.phone}
+            value={inputs.phone_number}
             onChange={changeInput}
             name='phone_number'
             required />

@@ -1,121 +1,240 @@
-import React, { useContext, useState } from 'react';
-import { FormGroup } from 'react-bootstrap';
+import React, { useState, useContext } from 'react';
 import { Context } from "../store/appContext.js";
 import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 
 function SignupTrainer() {
     const { store, actions } = useContext(Context)
-    const [firstName, setFirstname] = useState('')
-    const [lastName, setLastname] = useState('')
-    const [email, setEmail] = useState('')
-    const [city, setCity] = useState('')
-    const [postalCode, setPostalcode] = useState('')
-    const [password, setPassword] = useState('')
-    const [phone, setPhone] = useState('')
-    const [iban, setIban] = useState('')
-    const [gender, setGender] = useState('')
-    const [website, setWebsite] = useState('')
-    const [instagram, setInstagram] = useState('')
-    const [facebook, setFacebook] = useState('')
-    const [twittter, setTwitter] = useState('')
+    const [validated, setValidated] = useState(false);
+    const [inputs, setInputs] = useState({
+        name: '',
+        last_name: '',
+        email: '',
+        password: '',
+        city: '',
+        postal_code: '',
+        phone_number: '',
+        gender: 'Male',
+        website_url: '',
+        instagram_url: '',
+        facebook_url: '',
+        x_url: '',
+        bank_iban: ''
+    })
 
     let newTrainer = {}
 
-    const addTrainer = (e) => {
-        e.preventDefault()
-        newTrainer = {
-            name: firstName,
-            last_name: lastName,
-            email: email,
-            password: password,
-            city: city,
-            postal_code: parseInt(postalCode),
-            phone_number: phone,
-            gender: gender === '' ? 'Male' : gender,
-            website_url: website,
-            instagram_url: instagram,
-            facebook_url: facebook,
-            x_url: twittter,
-            bank_iban: iban
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.stopPropagation();
         }
+        setValidated(true);
+        newTrainer = {
+            name: inputs.name,
+            last_name: inputs.last_name,
+            email: inputs.email,
+            password: inputs.password,
+            city: inputs.city,
+            postal_code: parseInt(inputs.postal_code),
+            phone_number: inputs.phone_number,
+            gender: inputs.gender === '' ? 'Male' : inputs.gender,
+            website_url: inputs.website_url,
+            instagram_url: inputs.instagram_url,
+            facebook_url: inputs.facebook_url,
+            x_url: inputs.x_url,
+            bank_iban: inputs.bank_iban
+        }
+        console.log(newTrainer)
         actions.addTrainer(newTrainer);
-        document.getElementById('first-name').value = '';
-        document.getElementById('last-name').value = '';
-        document.getElementById('email').value = '';
-        document.getElementById('city').value = '';
-        document.getElementById('postal-code').value = '';
-        document.getElementById('password').value = '';
-        document.getElementById('phone').value = '';
-        document.getElementById('gender').value = 'Male';
-        document.getElementById('iban').value = '';
-        document.getElementById('website').value = '';
-        document.getElementById('instagram').value = '';
-        document.getElementById('facebook').value = '';
-        document.getElementById('twitter').value = '';
+        setInputs({
+            name: '',
+            last_name: '',
+            email: '',
+            password: '',
+            city: '',
+            postal_code: '',
+            phone_number: '',
+            gender: 'Male',
+            website_url: '',
+            instagram_url: '',
+            facebook_url: '',
+            x_url: '',
+            bank_iban: ''
+        })
+    };
+
+    const changeInput = (event) => {
+        event.persist();
+        const { name, value } = event.target;
+        setInputs({
+            ...inputs,
+            [name]: value
+        })
     }
 
     return (
-        <Form style={{ 'paddingLeft': '10%', 'paddingRight': '10%' }} onSubmit={addTrainer}>
-            <Form.Group className="mb-3" controlId="firstName">
-                <Form.Label>First name</Form.Label>
-                <Form.Control type="text" placeholder="Enter first name" id='first-name' onChange={(e) => setFirstname(e.target.value)} required />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="lastName">
-                <Form.Label>Last name</Form.Label>
-                <Form.Control type="text" placeholder="Enter last name" id='last-name' onChange={(e) => setLastname(e.target.value)} required />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="email">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" id='email' onChange={(e) => setEmail(e.target.value)} required />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="city">
-                <Form.Label>City</Form.Label>
-                <Form.Control type="text" placeholder="Enter city" id='city' onChange={(e) => setCity(e.target.value)} required />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="postalCode">
-                <Form.Label>Postal code</Form.Label>
-                <Form.Control type="number" placeholder="Enter postal code" id='postal-code' onChange={(e) => setPostalcode(e.target.value)} required />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" id='password' onChange={(e) => setPassword(e.target.value)} required />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="phoneNumber">
-                <Form.Label>Phone number</Form.Label>
-                <Form.Control type="number" placeholder="Enter phone number" id='phone' onChange={(e) => setPhone(e.target.value)} required />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="iban">
-                <Form.Label>IBAN</Form.Label>
-                <Form.Control type="number" placeholder="Enter IBAN" id='iban' onChange={(e) => setIban(e.target.value)} required />
-            </Form.Group>
-            <Form.Group className="mb-3">
-                <Form.Label>Gender</Form.Label>
-                <Form.Select id='gender' onChange={(e) => setGender(e.target.value)} defaultValue='Male' required>
-                    <option value='Male'>Male</option>
-                    <option value='Female'>Female</option>
-                    <option value='Not Specified'>Not Specified</option>
-                </Form.Select>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="website">
-                <Form.Label>Website URL</Form.Label>
-                <Form.Control type="url" placeholder="Enter website url" id='website' onChange={(e) => setPhone(e.target.value)} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="instagram">
-                <Form.Label>Instagram URL</Form.Label>
-                <Form.Control type="url" placeholder="Enter Instagram url" id='instagram' onChange={(e) => setInstagram(e.target.value)} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="facebook">
-                <Form.Label>Facebook URL</Form.Label>
-                <Form.Control type="url" placeholder="Enter facebook url" id='facebook' onChange={(e) => setFacebook(e.target.value)} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="twitter">
-                <Form.Label>Twitter URL</Form.Label>
-                <Form.Control type="url" placeholder="Enter twitter url" id='twitter' onChange={(e) => setTwitter(e.target.value)} />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Sign up
-            </Button>
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <Row className="mb-3">
+                <Form.Group as={Col} md="4" controlId="name">
+                    <Form.Label>First name</Form.Label>
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="First name"
+                        value={inputs.name}
+                        onChange={changeInput}
+                        name='name'
+                    />
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group as={Col} md="4" controlId="last-name">
+                    <Form.Label>Last name</Form.Label>
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="Last name"
+                        value={inputs.last_name}
+                        onChange={changeInput}
+                        name='last_name'
+                    />
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group as={Col} md="4" controlId="gender">
+                    <Form.Label>Gender</Form.Label>
+                    <Form.Select
+                        id='gender'
+                        onChange={changeInput}
+                        name='gender'
+                        value={inputs.gender}
+                        required>
+                        <option value='Male'>Male</option>
+                        <option value='Female'>Female</option>
+                        <option value='Not Specified'>Not Specified</option>
+                    </Form.Select>
+                </Form.Group>
+            </Row>
+            <Row className="mb-3">
+                <Form.Group as={Col} md="6" controlId="email">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control
+                        type="email"
+                        placeholder="Email"
+                        value={inputs.email}
+                        onChange={changeInput}
+                        name='email'
+                        required />
+                    <Form.Control.Feedback type="invalid">
+                        Please provide a valid email.
+                    </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group as={Col} md="3" controlId="password">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                        type="password"
+                        placeholder="Password"
+                        value={inputs.password}
+                        onChange={changeInput}
+                        name='password'
+                        required />
+                    <Form.Control.Feedback type='invalid' >
+                        Please enter password.
+                    </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group as={Col} md="3" controlId="phone-number">
+                    <Form.Label>Phone number</Form.Label>
+                    <Form.Control
+                        type="number"
+                        placeholder="Phone number"
+                        value={inputs.phone_number}
+                        onChange={changeInput}
+                        name='phone_number'
+                        required />
+                    <Form.Control.Feedback type="invalid">
+                        Please provide a valid phone number.
+                    </Form.Control.Feedback>
+                </Form.Group>
+            </Row>
+            <Row className="mb-3">
+                <Form.Group as={Col} md="4" controlId="city">
+                    <Form.Label>City</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="City"
+                        value={inputs.city}
+                        onChange={changeInput}
+                        name='city'
+                        required />
+                    <Form.Control.Feedback>
+                        Looks good!
+                    </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group as={Col} md="4" controlId="postal-code">
+                    <Form.Label>Postal code</Form.Label>
+                    <Form.Control
+                        type="number"
+                        placeholder="Postal code"
+                        value={inputs.postal_code}
+                        onChange={changeInput}
+                        name='postal_code'
+                        required />
+                    <Form.Control.Feedback type="invalid">
+                        Please provide a postal code.
+                    </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group as={Col} md="4" controlId="bank_iban">
+                    <Form.Label>IBAN</Form.Label>
+                    <Form.Control
+                        type="number"
+                        placeholder="Bank IBAN"
+                        value={inputs.bank_iban}
+                        onChange={changeInput}
+                        name='bank_iban'
+                        required />
+                    <Form.Control.Feedback type="invalid">
+                        Please provide a valid IBAN.
+                    </Form.Control.Feedback>
+                </Form.Group>
+            </Row>
+            <Row className="mb-3">
+                <Form.Group as={Col} md="4" controlId="website_url">
+                    <Form.Label>Website url</Form.Label>
+                    <Form.Control
+                        type="url"
+                        placeholder="Website url"
+                        value={inputs.website_url}
+                        onChange={changeInput}
+                        name='website_url'
+                    />
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group as={Col} md="4" controlId="instagram_url">
+                    <Form.Label>Instagram URL</Form.Label>
+                    <Form.Control
+                        type="url"
+                        placeholder="Instagram url"
+                        value={inputs.instagram_url}
+                        onChange={changeInput}
+                        name='instagram_url'
+                    />
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group as={Col} md="4" controlId="x_url">
+                    <Form.Label>Twitter URL</Form.Label>
+                    <Form.Control
+                        type="url"
+                        placeholder="Twitter url"
+                        value={inputs.x_url}
+                        onChange={changeInput}
+                        name='x_url'
+                    />
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                </Form.Group>
+            </Row>
+            <Button type="submit">Submit form</Button>
         </Form>
     );
 }

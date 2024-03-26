@@ -90,7 +90,9 @@ function SignupTrainer() {
                         onChange={changeInput}
                         name='name'
                     />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                        Please provide first name.
+                    </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} md="4" controlId="last-name">
                     <Form.Label>Last name</Form.Label>
@@ -102,7 +104,9 @@ function SignupTrainer() {
                         onChange={changeInput}
                         name='last_name'
                     />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                        Please provide last name.
+                    </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} md="4" controlId="gender">
                     <Form.Label>Gender</Form.Label>
@@ -169,8 +173,8 @@ function SignupTrainer() {
                         onChange={changeInput}
                         name='city'
                         required />
-                    <Form.Control.Feedback>
-                        Looks good!
+                    <Form.Control.Feedback type="invalid">
+                        Please provide city.
                     </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} md="4" controlId="postal-code">
@@ -210,7 +214,6 @@ function SignupTrainer() {
                         onChange={changeInput}
                         name='website_url'
                     />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} md="4" controlId="instagram_url">
                     <Form.Label>Instagram URL</Form.Label>
@@ -221,7 +224,6 @@ function SignupTrainer() {
                         onChange={changeInput}
                         name='instagram_url'
                     />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} md="4" controlId="x_url">
                     <Form.Label>Twitter URL</Form.Label>
@@ -232,10 +234,9 @@ function SignupTrainer() {
                         onChange={changeInput}
                         name='x_url'
                     />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
             </Row>
-            <Button type="submit">Submit form</Button>
+            <Button type="submit">Sign up</Button>
         </Form>
     );
 }

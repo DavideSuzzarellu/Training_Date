@@ -75,7 +75,9 @@ function SignupUser() {
             onChange={changeInput}
             name='name'
           />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">
+            Please provide first name.
+          </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="last-name">
           <Form.Label>Last name</Form.Label>
@@ -87,7 +89,9 @@ function SignupUser() {
             onChange={changeInput}
             name='last_name'
           />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">
+            Please provide last name.
+          </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md="4" controlId="gender">
           <Form.Label>Gender</Form.Label>
@@ -154,8 +158,8 @@ function SignupUser() {
             onChange={changeInput}
             name='city'
             required />
-          <Form.Control.Feedback>
-            Looks good!
+          <Form.Control.Feedback type="invalid">
+            Please provide a city.
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md="6" controlId="postal-code">
@@ -172,7 +176,7 @@ function SignupUser() {
           </Form.Control.Feedback>
         </Form.Group>
       </Row>
-      <Button type="submit">Submit form</Button>
+      <Button type="submit">Sign up</Button>
     </Form>
   );
 }

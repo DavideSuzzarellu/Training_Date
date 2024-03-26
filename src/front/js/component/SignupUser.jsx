@@ -50,6 +50,7 @@ function SignupUser() {
       phone_number: '',
       gender: 'Male'
     })
+    setValidated(false);
   };
 
   const changeInput = (event) => {

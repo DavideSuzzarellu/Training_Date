@@ -65,6 +65,7 @@ function SignupTrainer() {
             x_url: '',
             bank_iban: ''
         })
+        setValidated(false);
     };
 
     const changeInput = (event) => {

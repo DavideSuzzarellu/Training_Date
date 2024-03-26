@@ -10,7 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       getMessage: async () => {
         try {
           // Fetching data from the backend
-          const url = process.env.BACKEND_URL + "/api/hello";
+          const url = "https://upgraded-space-umbrella-r46ggv7wx7q3x6wv-3001.app.github.dev/api/hello";
           const options = {
             headers: {
               'Content-Type': 'application/json'
@@ -25,7 +25,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
       addUser: async (newUser)=>{
-        const url = 'https://cautious-acorn-q7qrq69wqj74244wv-3001.app.github.dev/api/users'
+        const url = 'https://upgraded-space-umbrella-r46ggv7wx7q3x6wv-3001.app.github.dev/api/users'
         const options = {
           method: 'POST',
           headers: {
@@ -43,7 +43,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         return data
       },
       addTrainer: async (newTrainer) => {
-        const url= 'https://cautious-acorn-q7qrq69wqj74244wv-3001.app.github.dev/api/trainers'
+        const url= 'https://upgraded-space-umbrella-r46ggv7wx7q3x6wv-3001.app.github.dev/api/trainers'
         const options = {
           method: 'POST',
           headers: {

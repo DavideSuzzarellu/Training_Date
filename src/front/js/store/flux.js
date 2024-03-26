@@ -3,12 +3,10 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       message: null,
       demo: [{title: "FIRST", background: "white", initial: "white"},
-             {title: "SECOND", background: "white", initial: "white"}],
-      users: []     
+             {title: "SECOND", background: "white", initial: "white"}]
     },
     actions: {
       // Use getActions to call a function within a fuction
-      exampleFunction: () => { getActions().changeColor(0, "green"); },
       getMessage: async () => {
         try {
           // Fetching data from the backend
@@ -26,17 +24,44 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error)
         }
       },
-      changeColor: (index, color) => {
-        const store = getStore();  // Get the store
-        // We have to loop the entire demo array to look for the respective index and change its color
-        const demo = store.demo.map((element, i) => {
-          if (i === index) element.background = color;
-          return element;
-        });
-        setStore({ demo: demo });  // Reset the global store
+      addUser: async (newUser)=>{
+        const url = 'https://cautious-acorn-q7qrq69wqj74244wv-3001.app.github.dev/api/users'
+        const options = {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(newUser),
+        };
+        const response = await fetch(url, options);
+        if(!response.ok){
+          console.log(response.status, response.statusText);
+          return response.statusText;
+        };
+        const data = await response.json();
+        console.log(data);
+        return data
+      },
+      addTrainer: async (newTrainer) => {
+        const url= 'https://cautious-acorn-q7qrq69wqj74244wv-3001.app.github.dev/api/trainers'
+        const options = {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(newTrainer),
+        };
+        const response = await fetch(url, options);
+        if(!response.ok){
+          console.log(response.status, response.statusText);
+          return response.statusText;
+        };
+        const data = await response.json();
+        console.log(data);
+        return data
+      }
       }
     }
-  };
 };
 
 export default getState;

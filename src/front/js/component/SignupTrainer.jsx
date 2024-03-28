@@ -31,41 +31,42 @@ function SignupTrainer() {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.stopPropagation();
+            setValidated(true);
+        } else {
+            setValidated(false);
+            newTrainer = {
+                name: inputs.name,
+                last_name: inputs.last_name,
+                email: inputs.email,
+                password: inputs.password,
+                city: inputs.city,
+                postal_code: parseInt(inputs.postal_code),
+                phone_number: inputs.phone_number,
+                gender: inputs.gender === '' ? 'Male' : inputs.gender,
+                website_url: inputs.website_url,
+                instagram_url: inputs.instagram_url,
+                facebook_url: inputs.facebook_url,
+                x_url: inputs.x_url,
+                bank_iban: inputs.bank_iban
+            }
+            console.log(newTrainer)
+            actions.addTrainer(newTrainer);
+            setInputs({
+                name: '',
+                last_name: '',
+                email: '',
+                password: '',
+                city: '',
+                postal_code: '',
+                phone_number: '',
+                gender: 'Male',
+                website_url: '',
+                instagram_url: '',
+                facebook_url: '',
+                x_url: '',
+                bank_iban: ''
+            })
         }
-        setValidated(true);
-        newTrainer = {
-            name: inputs.name,
-            last_name: inputs.last_name,
-            email: inputs.email,
-            password: inputs.password,
-            city: inputs.city,
-            postal_code: parseInt(inputs.postal_code),
-            phone_number: inputs.phone_number,
-            gender: inputs.gender === '' ? 'Male' : inputs.gender,
-            website_url: inputs.website_url,
-            instagram_url: inputs.instagram_url,
-            facebook_url: inputs.facebook_url,
-            x_url: inputs.x_url,
-            bank_iban: inputs.bank_iban
-        }
-        console.log(newTrainer)
-        actions.addTrainer(newTrainer);
-        setInputs({
-            name: '',
-            last_name: '',
-            email: '',
-            password: '',
-            city: '',
-            postal_code: '',
-            phone_number: '',
-            gender: 'Male',
-            website_url: '',
-            instagram_url: '',
-            facebook_url: '',
-            x_url: '',
-            bank_iban: ''
-        })
-        setValidated(false);
     };
 
     const changeInput = (event) => {

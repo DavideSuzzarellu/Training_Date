@@ -25,6 +25,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
       addUser: async (newUser)=>{
+        console.log(newUser)
         const url = 'https://upgraded-space-umbrella-r46ggv7wx7q3x6wv-3001.app.github.dev/api/users'
         const options = {
           method: 'POST',

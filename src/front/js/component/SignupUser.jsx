@@ -26,40 +26,37 @@ function SignupUser() {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
+      setValidated(true);
+    } else {
+      setValidated(false);
+      newUser = {
+        name: inputs.name,
+        last_name: inputs.last_name,
+        email: inputs.email,
+        password: inputs.password,
+        city: inputs.city,
+        postal_code: parseInt(inputs.postal_code),
+        phone_number: inputs.phone_number,
+        gender: inputs.gender === '' ? 'Male' : inputs.gender
+      }
+      console.log(newUser)
+      actions.addUser(newUser);
+      setInputs({
+        name: '',
+        last_name: '',
+        email: '',
+        password: '',
+        city: '',
+        postal_code: '',
+        phone_number: '',
+        gender: 'Male'
+      });
     }
-    setValidated(true);
-    newUser = {
-      name: inputs.name,
-      last_name: inputs.last_name,
-      email: inputs.email,
-      password: inputs.password,
-      city: inputs.city,
-      postal_code: parseInt(inputs.postal_code),
-      phone_number: inputs.phone_number,
-      gender: inputs.gender === '' ? 'Male' : inputs.gender
-    }
-    console.log(newUser)
-    actions.addUser(newUser);
-    setInputs({
-      name: '',
-      last_name: '',
-      email: '',
-      password: '',
-      city: '',
-      postal_code: '',
-      phone_number: '',
-      gender: 'Male'
-    })
-    setValidated(false);
   };
 
-  const changeInput = (event) => {
-    event.persist();
-    const { name, value } = event.target;
-    setInputs({
-      ...inputs,
-      [name]: value
-    })
+  const changeInput = (e) => {
+    e.persist();
+    setInputs((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
   }
 
   return (
@@ -71,7 +68,7 @@ function SignupUser() {
             required
             type="text"
             placeholder="First name"
-            value={inputs.name}
+            value={inputs.name || ""}
             onChange={changeInput}
             name='name'
           />
@@ -85,7 +82,7 @@ function SignupUser() {
             required
             type="text"
             placeholder="Last name"
-            value={inputs.last_name}
+            value={inputs.last_name || ""}
             onChange={changeInput}
             name='last_name'
           />
@@ -99,7 +96,7 @@ function SignupUser() {
             id='gender'
             onChange={changeInput}
             name='gender'
-            value={inputs.gender}
+            value={inputs.gender || ""}
             required>
             <option value='Male'>Male</option>
             <option value='Female'>Female</option>
@@ -113,7 +110,7 @@ function SignupUser() {
           <Form.Control
             type="email"
             placeholder="Email"
-            value={inputs.email}
+            value={inputs.email || ""}
             onChange={changeInput}
             name='email'
             required />
@@ -126,7 +123,7 @@ function SignupUser() {
           <Form.Control
             type="password"
             placeholder="Password"
-            value={inputs.password}
+            value={inputs.password || ""}
             onChange={changeInput}
             name='password'
             required />
@@ -139,7 +136,7 @@ function SignupUser() {
           <Form.Control
             type="number"
             placeholder="Phone number"
-            value={inputs.phone_number}
+            value={inputs.phone_number || ""}
             onChange={changeInput}
             name='phone_number'
             required />
@@ -154,7 +151,7 @@ function SignupUser() {
           <Form.Control
             type="text"
             placeholder="City"
-            value={inputs.city}
+            value={inputs.city || ""}
             onChange={changeInput}
             name='city'
             required />
@@ -167,7 +164,7 @@ function SignupUser() {
           <Form.Control
             type="number"
             placeholder="Postal code"
-            value={inputs.postal_code}
+            value={inputs.postal_code || ""}
             onChange={changeInput}
             name='postal_code'
             required />

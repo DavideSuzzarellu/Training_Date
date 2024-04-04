@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Context } from '../store/appContext';
 import { Form, DropdownButton, Dropdown, Button } from 'react-bootstrap';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -21,6 +21,11 @@ const Homepage = () => {
         setFilters(filters);
         console.log('Filters submitted:', filters);
     };
+
+    useEffect(() => {
+        const adr = '1600 Amphitheatre Parkway, Mountain View, CA'
+        actions.getGeolocation(adr);
+    }, [])
 
 
     return (

@@ -22,6 +22,8 @@ bcrypt = "*"
 flask-bcrypt = "*"
 flask-jwt-extended = "*"
 flask-login = "*"
+flask-mail = "*"
+googlemaps = "*"
 
 [requires]
 python_version = "3.10"

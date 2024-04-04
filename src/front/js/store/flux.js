@@ -15,7 +15,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       filters: {
         trainingType: '',
         trainingLevel: ''
-      }
+      },
+      currentGeolocation: []
     },
 
     actions: {
@@ -389,17 +390,24 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ filters: newFilters });
       },
 
-      searchGym: async (city) => {
-        const url = `${process.env.BACKEND_URL}/api/gyms/${city}`
+      getGeolocation: async (adr) => {
+        const apiKey = process.env.GOOGLE_API_KEY;
+        const address = adr;
+
+
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
+
         const response = await fetch(url);
         if (!response.ok) {
-          console.error(`Error processing request. HTTP error code ${response.status}`)
-          return null
-        }
-        const data = await response.json();
-        return data
+          console.error(`Failed to process geolocation request. HTTP error ${response.statusText}`)
+        };
+        const data = response.json();
+        console.log(data);
+
+
       }
     }
   }
+}
 
-  export default getState;
+export default getState;

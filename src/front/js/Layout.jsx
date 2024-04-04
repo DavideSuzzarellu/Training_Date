@@ -17,6 +17,7 @@ import Homepage from "./pages/Homepage.jsx";
 import TrainerProfile from "./pages/TrainerProfile.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
 import Signup from "./pages/Signup.jsx";
+import Map from "./pages/Maps.jsx";
 
 // Create your first component
 const Layout = () => {
@@ -40,6 +41,7 @@ const Layout = () => {
                         <Route element={<TrainerProfile />} path='/trainer/:id/profile' />
                         <Route element={<UserProfile />} path='/user/:id/profile' />
                         <Route element={<Signup />} path='/signup' />
+                        <Route element={<Map />} path='/map' />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

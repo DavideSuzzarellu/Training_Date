@@ -16,7 +16,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         trainingType: '',
         trainingLevel: ''
       },
-      currentGeolocation: []
+      currentGeolocation: {
+        lat: '',
+        lng: ''
+      }
     },
 
     actions: {
@@ -401,13 +404,22 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (!response.ok) {
           console.error(`Failed to process geolocation request. HTTP error ${response.statusText}`)
         };
-        const data = response.json();
+        const data = await response.json();
         console.log(data);
-
-
+        const location = data.results[0].geometry.location;
+        console.log(location)
+        const lat = location.lat;
+        const lng = location.lng;
+        const currentGeolocation = {
+          lat: lat,
+          lng: lng
+        };
+        setStore({ currentGeolocation });
+        return currentGeolocation;
       }
     }
   }
 }
+
 
 export default getState;

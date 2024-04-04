@@ -49,7 +49,7 @@ const HomeClassList = ({ filters }) => {
                                 {store.logged &&
                                     <Button variant="primary" onClick={() => updateCart(oneClass.id)}>Signup for Class</Button>
                                 }
-                                <MapModal />
+                                <MapModal addressData={[oneClass.city, oneClass.postal_code, oneClass.street_name, oneClass.street_number]} />
                             </Card.Body>
                         </Card>
                     ))}

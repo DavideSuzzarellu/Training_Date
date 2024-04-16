@@ -140,7 +140,7 @@ const AllClasses = () => {
             <Row xs={1} md={2} lg={3} className="justify-content-center">
                 {filteredClasses.length > 0 ? (
                     filteredClasses.map(classItem => (
-                        <Col key={classItem.id} className="mb-4">
+                        <Col lg={3} md={4} sm={6} key={classItem.id} className="mb-4">
                             <Card border="primary">
                                 <Card.Header>{classItem.class_name}</Card.Header>
                                 <Card.Body >
@@ -189,7 +189,7 @@ const AllClasses = () => {
                     ))
                 ) : (
                     currentClasses.map(classItem => (
-                        <Col key={classItem.id} className="mb-4">
+                        <Col lg={3} md={4} sm={6} key={classItem.id} className="mb-4">
                             <Card border="primary">
                                 <Card.Header>{classItem.class_name}</Card.Header>
                                 <Card.Body >

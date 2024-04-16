@@ -216,17 +216,21 @@ const HomeUserClasses = ({ filters }) => {
                     <Carousel prevIcon={<BsChevronCompactLeft />} nextIcon={<BsChevronCompactRight />}>
                         {chunkedClasses.map((chunk, index) => (
                             <Carousel.Item key={index}>
-                                <div className="row d-flex flex-row align-items-center justify-content-center">
+                                <div className="row d-flex flex-row align-items-center justify-content-center h-100">
                                     {chunk.map(oneClass => (
-                                        <div className='col-xl-3 col-lg-6 col-sm-7 col-sm-10 d-flex flex-row justify-content-center align-items-center h-100' key={oneClass.id}>
-                                            <Card className='my-3'>
-                                                <Card.Img variant="top" src={placeholderImageUrl} />
-                                                <Card.Header>Detalles de la Clase</Card.Header>
+                                        <div className='col-xl-3 col-lg-4 col-md-6 col-sm-8 col-sm-10 d-flex flex-row justify-content-center align-items-center h-100' key={oneClass.id}>
+                                            <Card className='my-3 h-100'>
+                                                <Card.Header>{oneClass.class_name}</Card.Header>
                                                 <Card.Body>
-                                                    <Card.Title>{oneClass.class_name ? oneClass.class_name : 'Clase de entrenamiento'}</Card.Title>
-                                                    <Card.Text>
-                                                        {oneClass.class_details ? oneClass.class_details : 'Clase de entrenamiento'}
-                                                    </Card.Text>
+                                                    <Card.Text><strong>Ciudad:</strong> {oneClass.city}</Card.Text>
+                                                    <Card.Text><strong>Precio:</strong> {oneClass.price / 100} €</Card.Text>
+                                                    <Card.Text><strong>Capacidad:</strong> personas{oneClass.capacity}</Card.Text>
+                                                    <Card.Text><strong>Nivel de entrenamiento:</strong> {
+                                                        oneClass.training_level === "Advanced" ? "Avanzado" :
+                                                            oneClass.training_level === "Intermediate" ? "Intermedio" :
+                                                                oneClass.training_level === "Beginner" ? "Principiante" :
+                                                                    oneClass.training_level
+                                                    }</Card.Text>
                                                 </Card.Body>
                                                 <Card.Footer className='p-3 w-auto'>
                                                     {oneClass.capacity < 1 ? (
@@ -265,15 +269,20 @@ const HomeUserClasses = ({ filters }) => {
                 ) : (
                     <div className="row d-flex flex-row align-items-center justify-content-center">
                         {allClasses.map(oneClass => (
-                            <div className='col-xl-3 col-md-6 col-sm-12 d-flex flex-row justify-content-center align-items-center h-100' key={oneClass.id}>
+                            <div className='col-xl-3 col-lg-4 col-md-6 col-sm-8 col-sm-10 d-flex flex-row justify-content-center align-items-center h-100' key={oneClass.id}>
                                 <Card className='my-3 w-auto'>
                                     <Card.Img variant="top" src={placeholderImageUrl} />
-                                    <Card.Header>Detalles de la Clase</Card.Header>
+                                    <Card.Header>{oneClass.class_name}</Card.Header>
                                     <Card.Body>
-                                        <Card.Title>{oneClass.class_name ? oneClass.class_name : 'Clase de entrenamiento'}</Card.Title>
-                                        <Card.Text>
-                                            {oneClass.class_details ? oneClass.class_details : 'Clase de entrenamiento'}
-                                        </Card.Text>
+                                        <Card.Text><strong>Ciudad:</strong> {oneClass.city}</Card.Text>
+                                        <Card.Text><strong>Precio:</strong> {oneClass.price / 100} €</Card.Text>
+                                        <Card.Text><strong>Capacidad:</strong> {oneClass.capacity} personas</Card.Text>
+                                        <Card.Text><strong>Nivel de entrenamiento:</strong> {
+                                            oneClass.training_level === "Advanced" ? "Avanzado" :
+                                                oneClass.training_level === "Intermediate" ? "Intermedio" :
+                                                    oneClass.training_level === "Beginner" ? "Principiante" :
+                                                        oneClass.training_level
+                                        }</Card.Text>
                                     </Card.Body>
                                     <Card.Footer className='p-3 w-auto'>
                                         {oneClass.capacity < 1 ? (

@@ -15,10 +15,11 @@ export const TrainerClasses = () => {
     const [currentDateTime, setCurrentDateTime] = useState(new Date());
     const [pastClasses, setPastClasses] = useState([]);
     const [futureClasses, setFutureClasses] = useState([]);
-    const [activeTab, setActiveTab] = useState("past");
+    const [activeTab, setActiveTab] = useState("future");
     const [activePage, setActivePage] = useState(1);
     const classesPerPage = 4;
     const [showModal, setShowModal] = useState(false);
+    const [deleteModal, setdeleteModal] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -50,6 +51,7 @@ export const TrainerClasses = () => {
             setShowModal(false);
         }
     }
+
 
     const handleDetails = async (classId) => {
         await actions.getTrainerClassDetails(classId)

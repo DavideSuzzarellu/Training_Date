@@ -1212,6 +1212,7 @@ def handle_trainer_class(id, class_id):
     if (current_user['role'] == 'trainers' and current_user['id'] == trainer.id) or (current_user["role"] == "administrators"):
         if request.method == "DELETE":
             classes_users = UsersClasses.query.filter_by(class_id=class_id).all()
+            print("Class", classes_users)
             has_paid_users = any(class_user.stripe_status == "Paid" for class_user in classes_users)
             if has_paid_users:
                 response_body["message"] = "Unable to delete class, it has associated users with paid status"

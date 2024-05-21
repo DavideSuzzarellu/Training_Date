@@ -2,7 +2,7 @@ import React, { useRef, useContext, useState } from 'react';
 import { Container, Row, Col, Card, Button, Carousel } from 'react-bootstrap';
 import { Context } from '../store/appContext';
 import { Link } from 'react-router-dom';
-import img from "/workspaces/sp54-final-project-g3/src/front/img/hutterstock_77087711229557_lm.jpg"
+import img from "../../img/hutterstock_77087711229557_lm.jpg"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import { SpecializationModal } from "../component/SpecializationModal.jsx";

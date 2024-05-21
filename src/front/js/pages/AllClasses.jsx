@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
 import { Container, Row, Col, Card, Pagination, Alert, Button, Navbar, Offcanvas, Form } from 'react-bootstrap';
-import MapModal from "/workspaces/sp54-final-project-g3/src/front/js/component/MapModal.jsx";
+import MapModal from "../component/MapModal.jsx";
 import ClassModal from '../component/ClassModal.jsx';
 import { IoIosWarning } from "react-icons/io";
 import HomeFilters from '../component/HomeFilters.jsx';

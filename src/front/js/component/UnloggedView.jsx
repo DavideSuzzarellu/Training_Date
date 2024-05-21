@@ -6,9 +6,9 @@ import { FaDumbbell } from 'react-icons/fa';
 import { LogInModal } from './LogInModal.jsx';
 import ClassesCarousel from './ClassesCarousel.jsx';
 import RegisterPopup from './RegisterPopup.jsx';
-import img1 from "/workspaces/sp54-final-project-g3/src/front/img/unlogged-view-img.jpg"
-import img2 from "/workspaces/sp54-final-project-g3/src/front/img/trainer-image-unlogged-view.png"
-import img3 from "/workspaces/sp54-final-project-g3/src/front/img/ulogged-view-img-user.jpg"
+import img1 from "../../img/unlogged-view-img.jpg"
+import img2 from "../../img/trainer-image-unlogged-view.png"
+import img3 from "../../img/ulogged-view-img-user.jpg"
 
 const UnloggedView = () => {
     const { store, actions } = useContext(Context)

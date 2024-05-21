@@ -4,7 +4,7 @@ import { Context } from '../store/appContext';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
-import personalTrainer from "/workspaces/sp54-final-project-g3/src/front/img/personal-trainer.jpg"
+import personalTrainer from "../../img/personal-trainer.jpg"
 
 
 const TrainerHomepage = () => {

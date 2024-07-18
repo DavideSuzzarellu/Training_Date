@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { Container, Row, Col, Card, Alert, Button } from 'react-bootstrap';
 import { Context } from '../store/appContext';
-import Loading from '/workspaces/sp54-final-project-g3/src/front/js/component/Loading.jsx';
+import Loading from '../component/Loading.jsx';
 import { Link } from 'react-router-dom'
-import { AddTrainerSpecialization } from "/workspaces/sp54-final-project-g3/src/front/js/pages/AddTrainerSpecialization.jsx"
+import { AddTrainerSpecialization } from "../pages/AddTrainerSpecialization.jsx"
 import { IoIosWarning } from "react-icons/io";
 import { SpecializationModal } from "../component/SpecializationModal.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

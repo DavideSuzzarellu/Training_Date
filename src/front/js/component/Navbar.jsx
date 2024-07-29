@@ -269,7 +269,7 @@ export const MyNavbar = () => {
                   <Nav.Link
                     className="d-none d-md-block"
                     as={Link}
-                    to={`/trainer/${currentUser.trainer.id}/profile`}
+                    to={`/trainer/${currentUser?.trainer?.id}/profile`}
                     style={{
                       color: activeNavTab === 'profile' ? '#ffffff' : '',
                       transition: 'color 0.2s',

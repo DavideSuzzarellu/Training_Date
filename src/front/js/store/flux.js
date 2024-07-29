@@ -57,8 +57,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       getAllClasses: async () => {
-        const url = `${process.env.BACKEND_URL}classes`
-        const response = await fetch(url)
+        const response = await fetch(`${process.env.BACKEND_URL}/classes`)
         if (!response.ok) {
           console.error(`Error fetching classes. HTTP Status ${response.status}`)
           return null
@@ -90,7 +89,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         };
 
-        const url = process.env.BACKEND_URL + `trainers/${id}/specializations`
+        const url = `${process.env.BACKEND_URL}/trainers/${id}/specializations`
         const response = await fetch(url, options)
         if (!response.ok) {
           console.error(`Error fetching user classes. HTTP Status ${response.status}`)
@@ -102,8 +101,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       getSpecializations: async () => {
-        const url = `${process.env.BACKEND_URL}specializations`
-        const response = await fetch(url)
+        const response = await fetch(`${process.env.BACKEND_URL}/specializations`)
         if (!response.ok) {
           console.error(`Error fetching specializations. HTTP Status ${response.status}`)
           return null
@@ -129,7 +127,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             Authorization: `Bearer ${token}`,
           },
         };
-        const url = process.env.BACKEND_URL + `users/${id}/classes`
+        const url = process.env.BACKEND_URL + `/users/${id}/classes`
         const response = await fetch(url, options)
         if (!response.ok) {
           console.error(`Error fetching user classes. HTTP Status ${response.status}`)
@@ -159,7 +157,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             Authorization: `Bearer ${token}`,
           },
         }
-        const response = await fetch(`${process.env.BACKEND_URL}trainers/${trainerId}/classes`, options)
+        const response = await fetch(`${process.env.BACKEND_URL}/trainers/${trainerId}/classes`, options)
         if (!response.ok) {
           return response.status
         }
@@ -188,7 +186,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             Authorization: `Bearer ${token}`,
           },
         }
-        const response = await fetch(`${process.env.BACKEND_URL}trainers/${trainerId}/classes/${classId}`, options)
+        const response = await fetch(`${process.env.BACKEND_URL}/trainers/${trainerId}/classes/${classId}`, options)
         if (!response) return response.status
         const data = await response.json()
         setStore({ userInTrainerClass: data })
@@ -218,7 +216,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         };
 
-        const response = await fetch(`${process.env.BACKEND_URL}current_available_account`, options);
+        const response = await fetch(`${process.env.BACKEND_URL}/current_available_account`, options);
 
         if (!response.ok) {
           localStorage.removeItem("accessToken");
@@ -250,7 +248,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             password: inputs.password,
           }),
         };
-        const response = await fetch(`${process.env.BACKEND_URL}login/${user_type}`, options)
+        const response = await fetch(`${process.env.BACKEND_URL}/login/${user_type}`, options)
         if (!response.ok) return false
         const data = await response.json()
         setStore({ currentUser: data.results });
@@ -278,7 +276,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       addUser: async (inputs) => {
-        const url = process.env.BACKEND_URL + 'users'
         const options = {
           method: 'POST',
           headers: {
@@ -295,7 +292,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             gender: inputs.gender
           }),
         };
-        const response = await fetch(url, options);
+        const response = await fetch(`${process.env.BACKEND_URL}/users`, options);
         if (!response.ok) {
           console.log(response.status, response.statusText);
           return false;
@@ -326,7 +323,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             bank_iban: inputs.bank_iban
           }),
         };
-        const response = await fetch(`${process.env.BACKEND_URL}trainers`, options);
+        const response = await fetch(`${process.env.BACKEND_URL}/trainers`, options);
         if (!response.ok) {
           console.log(response.status, response.statusText);
           return false;
@@ -364,7 +361,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             training_type: inputs.training_type
           }),
         };
-        const response = await fetch(`${process.env.BACKEND_URL}trainers/${trainerId}/classes`, options);
+        const response = await fetch(`${process.env.BACKEND_URL}/trainers/${trainerId}/classes`, options);
         if (!response.ok) {
           console.error("Failed to create class:", response.status);
           return false;
@@ -379,7 +376,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("No access token found!");
           return null;
         }
-        const url = `${process.env.BACKEND_URL}users/${id}`
+        const url = `${process.env.BACKEND_URL}/users/${id}`
         const options = {
           method: 'PATCH',
           headers: {
@@ -411,7 +408,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("No access token found!");
           return null;
         }
-        const url = `${process.env.BACKEND_URL}trainers/${id}`
+        const url = `${process.env.BACKEND_URL}/trainers/${id}`
         const options = {
           method: 'PATCH',
           headers: {
@@ -470,7 +467,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         };
 
         try {
-          const response = await fetch(`${process.env.BACKEND_URL}trainers/${trainerId}/specializations`, options);
+          const response = await fetch(`${process.env.BACKEND_URL}/trainers/${trainerId}/specializations`, options);
           if (!response.ok) {
             console.error("Failed to post specialization:", response.status);
             return false;
@@ -507,7 +504,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         };
 
-        const response = await fetch(`${process.env.BACKEND_URL}users/${userId}/classes`, options)
+        const response = await fetch(`${process.env.BACKEND_URL}/users/${userId}/classes`, options)
         if (!response.ok) return false
         const data = await response.json()
         console.log(data)
@@ -540,7 +537,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         };
 
-        const response = await fetch(`${process.env.BACKEND_URL}users/${userId}/classes/${classId}`, options)
+        const response = await fetch(`${process.env.BACKEND_URL}/users/${userId}/classes/${classId}`, options)
         if (!response.ok) return response.status
         const data = await response.json()
         console.log(data)
@@ -561,7 +558,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             class_id: classId
           })
         }
-        const response = await fetch(`${process.env.BACKEND_URL}trainers/${trainerId}/classes/${classId}`, options)
+        const response = await fetch(`${process.env.BACKEND_URL}/trainers/${trainerId}/classes/${classId}`, options)
 
         if (!response.ok) return false
         const data = await response.json()
@@ -570,7 +567,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           const storedClasses = JSON.parse(storedClassesString);
           const updatedClasses = storedClasses.filter(cls => cls.id !== data.class.id);
           localStorage.setItem("trainerClasses", JSON.stringify(updatedClasses));
-          setStore({trainerClasses: updatedClasses})
+          setStore({ trainerClasses: updatedClasses })
           return true;
         }
       },
@@ -590,7 +587,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         }
 
-        const response = await fetch(`${process.env.BACKEND_URL}users/${id}`, options)
+        const response = await fetch(`${process.env.BACKEND_URL}/users/${id}`, options)
         if (!response.ok) return false
         const data = response.json()
         setStore({ logged: false })
@@ -615,7 +612,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         }
 
-        const response = await fetch(`${process.env.BACKEND_URL}trainers/${id}`, options)
+        const response = await fetch(`${process.env.BACKEND_URL}/trainers/${id}`, options)
         if (!response.ok) return response.status
         const data = response.json()
         console.log(data)
@@ -640,7 +637,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             }),
           };
 
-          const response = await fetch(`${process.env.BACKEND_URL}create-checkout-session`, options);
+          const response = await fetch(`${process.env.BACKEND_URL}/create-checkout-session`, options);
           if (!response.ok) {
             const errorData = await response.json();
             throw new Error(errorData.message || 'Failed to create checkout session');
